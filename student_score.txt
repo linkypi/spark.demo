@@ -1,0 +1,7 @@
+"zhangsan",200
+"lisi",360
+"wangwu",230
+"zhaoliu",254
+"marry",190
+"Tom",369
+"kitty",431
