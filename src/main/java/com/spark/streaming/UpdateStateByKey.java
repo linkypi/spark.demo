@@ -28,7 +28,7 @@ public class UpdateStateByKey {
         // 那么是不是也要checkpoint一份因为你要长期保存一份key的state的话，
         // 那么spark streaming是要求必须用checkpoint的，
         // 以便于在内存数据丢失的时候，可以从checkpoint中恢复数据
-        jsContext.checkpoint("hdfs://spark1:9000/wc_checkpoint");
+        jsContext.checkpoint("hdfs://namenode:8020/wc_checkpoint");
 
         JavaReceiverInputDStream<String> javaReceiverInputDStream = jsContext.socketTextStream("localhost", 9999);
         JavaDStream<String> lineDs = javaReceiverInputDStream.flatMap(new FlatMapFunction<String, String>() {

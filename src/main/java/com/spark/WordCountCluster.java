@@ -17,17 +17,18 @@ public class WordCountCluster {
     public static void main(String[] args) {
 
         SparkConf conf = new SparkConf()
+                .setMaster("local[2]")
                 .setAppName("WordCountCluster");
 //                .setMaster("spark://spark-master:7077"); //spark://192.168.199.160:7077
 
         JavaSparkContext context = new JavaSparkContext(conf);
-        JavaRDD<String> lines = context.textFile("hdfs://spark1:9000/README.txt");
+        JavaRDD<String> lines = context.textFile("hdfs://namenode:8020/student_score.txt");
 
         JavaRDD<String> words = lines.flatMap(new FlatMapFunction<String, String>() {
             private static final long serialVersionUID = 1l;
 
             public Iterator<String> call(String line) throws Exception{
-                return Arrays.asList(line.split(" ")).iterator();
+                return Arrays.asList(line.split(",")).iterator();
             }
         });
 

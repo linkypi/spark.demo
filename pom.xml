@@ -10,10 +10,35 @@
     <properties>
         <fink.version>1.7.2</fink.version>
         <spark.version>3.3.2</spark.version>
-<!--        <spark.version>2.4.3</spark.version>-->
+        <hadoop.version>3.2.1</hadoop.version>
         <scala.binary.version>2.12</scala.binary.version>
     </properties>
     <dependencies>
+
+<!--        <dependency>-->
+<!--            <groupId>com.fasterxml.jackson.core</groupId>-->
+<!--            <artifactId>jackson-databind</artifactId>-->
+<!--            <version>2.4.4</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>com.fasterxml.jackson.core</groupId>-->
+<!--            <artifactId>jackson-core</artifactId>-->
+<!--            <version>2.4.4</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>com.fasterxml.jackson.core</groupId>-->
+<!--            <artifactId>jackson-annotations</artifactId>-->
+<!--            <version>2.4.4</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash;hadoop客户端&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.hadoop</groupId>-->
+<!--            <artifactId>hadoop-client</artifactId>-->
+<!--            <version>${hadoop.version}</version>-->
+<!--        </dependency>-->
+
         <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
         <dependency>
             <groupId>org.apache.spark</groupId>

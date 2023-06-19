@@ -36,12 +36,12 @@ public class Top3HotProduct {
         JavaStreamingContext jsContext = new JavaStreamingContext(sparkConf, Durations.seconds(5));
 
         // 数据格式: username  product category
-        // leo  iphone mobile
-        // hack  iphone mobile
-        // ben  iphone mobile
-        // lily  redmi mobile
-        // jim  nexus mobile
-        // green  redmi mobile
+        // leo iphone mobile
+        // hack iphone mobile
+        // ben iphone mobile
+        // lily redmi mobile
+        // jim nexus mobile
+        // green redmi mobile
         JavaReceiverInputDStream<String> searchLogDStream = jsContext.socketTextStream("localhost", 9999);
         JavaPairDStream<String, Integer> pairDStream = searchLogDStream.mapToPair(new PairFunction<String, String, Integer>() {
             public Tuple2<String, Integer> call(String s) throws Exception {
@@ -61,8 +61,9 @@ public class Top3HotProduct {
             public void call(JavaPairRDD<String, Integer> rdd, Time time) throws Exception {
                 JavaRDD<Row> categoryCountRDD = rdd.map(new Function<Tuple2<String, Integer>, Row>() {
                     public Row call(Tuple2<String, Integer> tuple2) throws Exception {
-                        String category = tuple2._1.split(" ")[0];
-                        String product = tuple2._1.split(" ")[1];
+                        String[] arr = tuple2._1.split("_");
+                        String category = arr[0];
+                        String product = arr[1];
                         Integer count = tuple2._2;
                         return RowFactory.create(category, product, count);
                     }
@@ -77,7 +78,7 @@ public class Top3HotProduct {
 
                 SQLContext sqlContext = new SQLContext(categoryCountRDD.context());
                 Dataset<Row> dataFrame = sqlContext.createDataFrame(categoryCountRDD, structType);
-                dataFrame.createTempView("product_click_log");
+                dataFrame.registerTempTable("product_click_log");
                 Dataset<Row> sql = sqlContext.sql("" +
                         "select category, product, click_count from (" +
                         "  select category, product, click_count," +
