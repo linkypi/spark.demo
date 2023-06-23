@@ -18,7 +18,7 @@ public class HDFSTest {
         // 设置数据节点主机名属性
         conf.set("dfs.client.use.datanode.hostname", "true");
         // 定义统一资源标识符 (uri: uniform resource identifier)
-        String uri = "hdfs://namenode:8020";
+        String uri = "hdfs://node1:9000";
         // 创建文件系统对象(基于HDFS的文件系统)
         FileSystem fs = FileSystem.get(new URI(uri), conf,  "root");
 

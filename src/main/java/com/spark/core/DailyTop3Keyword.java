@@ -1,4 +1,4 @@
-package com.spark;
+package com.spark.core;
 
 import org.apache.hadoop.hive.conf.HiveConf;
 import org.apache.hadoop.hive.ql.io.HiveContextAwareRecordReader;

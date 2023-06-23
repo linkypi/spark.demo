@@ -1,0 +1,8 @@
+hello zhangsan
+hello lisi
+hi wangwu
+hi zhaoliu
+hello marry
+man Tom
+hello kitty
+hi kitty

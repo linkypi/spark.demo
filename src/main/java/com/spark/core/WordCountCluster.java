@@ -1,4 +1,4 @@
-package com.spark;
+package com.spark.core;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
@@ -13,16 +13,51 @@ import scala.Tuple2;
 import java.util.Arrays;
 import java.util.Iterator;
 
+/**
+ * # standalone client 模式
+ * /opt/spark-3.3.2-bin-hadoop3/bin/spark-submit \
+ * --class com.spark.core.WordCountCluster \
+ * --master spark://node1:7077 \
+ * --num-executors 1 \ # 共有多少个executer运行spark app
+ * --driver-memory 800m \
+ * --executor-memory 600m \
+ * --executor-cores 1 \
+ * ~/spark.test-1.0-SNAPSHOT.jar
+ *
+ * # standalone cluster 模式
+ * /opt/spark-3.3.2-bin-hadoop3/bin/spark-submit \
+ * --class com.spark.core.WordCountCluster \
+ * --master spark://node1:7077 \
+ * --deploy-mode cluster \
+ * --supervise \ # 指定spark监控driver节点，若driver挂掉则自动重启driver
+ * --num-executors 1 \
+ * --driver-memory 800m \
+ * --executor-memory 600m \
+ * --executor-cores 1 \
+ * ~/spark.test-1.0-SNAPSHOT.jar
+ *
+ * # yarn cluster mode
+ * /opt/spark-3.3.2-bin-hadoop3/bin/spark-submit \
+ * --class com.spark.core.WordCountCluster \
+ * --master yarn \
+ * --deploy-mode cluster \
+ * --num-executors 1 \
+ * --driver-memory 800m \
+ * --executor-memory 600m \
+ * --executor-cores 1 \
+ * ~/spark.test-1.0-SNAPSHOT.jar
+ */
 public class WordCountCluster {
     public static void main(String[] args) {
 
         SparkConf conf = new SparkConf()
-                .setMaster("local[2]")
                 .setAppName("WordCountCluster");
-//                .setMaster("spark://spark-master:7077"); //spark://192.168.199.160:7077
+        // 若是以yarn cluster 模式执行则不可设置Master， 否则执行出错
+                // .setMaster("local[2]")
+                // .setMaster("spark://node1:7077");
 
         JavaSparkContext context = new JavaSparkContext(conf);
-        JavaRDD<String> lines = context.textFile("hdfs://namenode:8020/student_score.txt");
+        JavaRDD<String> lines = context.textFile("hdfs://node1:9000/student_score.txt");
 
         JavaRDD<String> words = lines.flatMap(new FlatMapFunction<String, String>() {
             private static final long serialVersionUID = 1l;
