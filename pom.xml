@@ -7,11 +7,18 @@
     <groupId>com.leo.org</groupId>
     <artifactId>spark.test</artifactId>
     <version>1.0-SNAPSHOT</version>
+
     <properties>
         <fink.version>1.17.1</fink.version>
         <spark.version>3.3.2</spark.version>
         <hadoop.version>3.2.1</hadoop.version>
         <scala.binary.version>2.12</scala.binary.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <java.version>8</java.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
     <dependencies>
 

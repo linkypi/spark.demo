@@ -3,7 +3,8 @@ package com.leo.test.flink
 import org.apache.flink.api.java.io.CsvInputFormat
 import org.apache.flink.api.scala.{DataSet, ExecutionEnvironment}
 import org.apache.flink.api.scala._
-import org.apache.flink.table.api.scala._
+import org.apache.flink.table.api.TableEnvironment._
+//import org.apache.flink.table.api.scala._
 import org.apache.flink.streaming.api.scala.StreamExecutionEnvironment
 import org.apache.flink.table.api.TableEnvironment
 
@@ -38,9 +39,9 @@ object TopN {
     val env = ExecutionEnvironment.getExecutionEnvironment
     val dataset:DataSet[(String,Integer)] = env.readCsvFile("")
 
-    val tableEnv = TableEnvironment.getTableEnvironment(env)
-    tableEnv.registerDataSet("tmp_table", dataset, 'user_id, 'item_id, 'category_id, 'behavior, 'timestamp)
-    val table = tableEnv.sqlQuery("select * from tmp_table where behavior='pv'")
+//    val tableEnv = TableEnvironment.getTableEnvironment(env)
+//    tableEnv.registerDataSet("tmp_table", dataset, 'user_id, 'item_id, 'category_id, 'behavior, 'timestamp)
+//    val table = tableEnv.sqlQuery("select * from tmp_table where behavior='pv'")
 
 
 //    val dataSource = env.createInput[UserBehavior](list)

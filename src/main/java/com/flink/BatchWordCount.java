@@ -12,9 +12,9 @@ public class BatchWordCount {
         ExecutionEnvironment batchEnv = ExecutionEnvironment.getExecutionEnvironment();
 
         // 批处理的数据抽象是一个 DataSet, 继承于 DataStream, 即批处理是基于流处理来实现
-        DataSource<String> dataSet = batchEnv.readTextFile("");
+        DataSource<String> dataSet = batchEnv.readTextFile("hdfs://node1:9000/words.txt");
         AggregateOperator<Tuple2<String, Integer>> sum = dataSet.flatMap(new FlatMapFunction<String, Tuple2<String, Integer>>() {
-            public void flatMap(String s, Collector<Tuple2<String, Integer>> collector) throws Exception {
+            public void flatMap(String s, Collector<Tuple2<String, Integer>> collector) {
                 String[] words = s.split("\\s+");
                 for (String item : words) {
                     collector.collect(Tuple2.of(item, 1));
@@ -23,6 +23,6 @@ public class BatchWordCount {
         }).groupBy(0).sum(1);
 
         sum.print();
-        batchEnv.execute();
+//        sum.count();
     }
 }
