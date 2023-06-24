@@ -8,7 +8,7 @@
     <artifactId>spark.test</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <fink.version>1.7.2</fink.version>
+        <fink.version>1.17.1</fink.version>
         <spark.version>3.3.2</spark.version>
         <hadoop.version>3.2.1</hadoop.version>
         <scala.binary.version>2.12</scala.binary.version>
@@ -64,18 +64,35 @@
             <version>${spark.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-table -->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.flink</groupId>-->
+<!--            <artifactId>flink-table_2.12</artifactId>-->
+<!--            <version>${fink.version}</version>-->
+<!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-table-api-java-bridge -->
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-table_2.12</artifactId>
-            <version>1.7.2</version>
-            <scope>provided</scope>
+            <artifactId>flink-table-api-java-bridge</artifactId>
+            <version>1.17.1</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-table-common -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-table-common</artifactId>
+            <version>${fink.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-java</artifactId>
-            <version>1.7.2</version>
+            <version>${fink.version}</version>
 <!--            <scope>provided</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-clients</artifactId>
+            <version>${fink.version}</version>
+            <!--            <scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>com.thoughtworks.paranamer</groupId>
@@ -85,7 +102,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-streaming-java_2.12</artifactId>
+            <artifactId>flink-streaming-java</artifactId>
             <version>${fink.version}</version>
 <!--            <scope>provided</scope>-->
         </dependency>

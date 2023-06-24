@@ -34,12 +34,11 @@ public class SocketWindowWordCount {
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         // get input data by connecting to the socket
-        DataStream<String> text = env.socketTextStream("192.168.60.209", port, "\n");
+        DataStream<String> text = env.socketTextStream("localhost", port, "\n");
 
         // parse the data, group it, window it, and aggregate the counts
         DataStream<WordWithCount> windowCounts = text
                 .flatMap(new FlatMapFunction<String, WordWithCount>() {
-
                     public void flatMap(String value, Collector<WordWithCount> out) {
                         for (String word : value.split("\\s")) {
                             out.collect(new WordWithCount(word, 1L));
